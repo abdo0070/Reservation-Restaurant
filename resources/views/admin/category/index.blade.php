@@ -35,7 +35,7 @@
                                            border-l border-transparent
                                            "
                                            >
-                                           TLD
+                                           Name
                                         </th>
                                         <th
                                            class="
@@ -50,7 +50,7 @@
                                            lg:px-4
                                            "
                                            >
-                                           Duration
+                                           Desctption
                                         </th>
                                         <th
                                            class="

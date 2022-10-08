@@ -20,7 +20,7 @@ class Admin extends Seeder
         User::create([
             'name' => "Admin",
             'email' => "Admin".Str::random(3)."@gmail.com",
-            'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi", // password
+            'password' => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi", // password => password has
             'is_admin' => true,
             'created_at' => date("Y-m-d H:i:s", strtotime('now')) ,
             'updated_at' => date("Y-m-d H:i:s", strtotime('now')) ,

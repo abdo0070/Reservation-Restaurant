@@ -20,6 +20,7 @@ class Admin
     {
         if (auth()->check() && auth()->user()->is_admin) // true , false 
         {
+            
             return $next($request);
         }
         abort(403);

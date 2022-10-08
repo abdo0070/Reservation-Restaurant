@@ -35,7 +35,7 @@
                                            border-l border-transparent
                                            "
                                            >
-                                           TLD
+                                           Name
                                         </th>
                                         <th
                                            class="
@@ -50,7 +50,7 @@
                                            lg:px-4
                                            "
                                            >
-                                           Duration
+                                           Table
                                         </th>
                                         <th
                                            class="
@@ -65,7 +65,7 @@
                                            lg:px-4
                                            "
                                            >
-                                           Registration
+                                           Guest Number
                                         </th>
                                         <th
                                            class="
@@ -80,7 +80,7 @@
                                            lg:px-4
                                            "
                                            >
-                                           Renewal
+                                           Data
                                         </th>
                                         <th
                                            class="
