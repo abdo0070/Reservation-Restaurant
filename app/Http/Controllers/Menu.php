@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MenuRequest;
+use App\Models\Category;
+use App\Models\Menu as ModelsMenu;
 use Illuminate\Http\Request;
 
 class Menu extends Controller
@@ -13,7 +16,9 @@ class Menu extends Controller
      */
     public function index()
     {
-       return view('admin.menu.index');
+        $menus = ModelsMenu::all();
+       return view('admin.menu.index' , compact('menus'));
+
     }
 
     /**
@@ -23,7 +28,8 @@ class Menu extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('admin.menu.create',compact('categories'));   
     }
 
     /**
@@ -32,9 +38,17 @@ class Menu extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MenuRequest $request)
     {
-        //
+        $image = $request->file('image')->store('public/categories'.time());
+        ModelsMenu::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'image' => $image,
+            'description' => $request->description
+        ]);
+
+        return to_route('admin.menu.index');
     }
 
     /**
@@ -56,7 +70,8 @@ class Menu extends Controller
      */
     public function edit($id)
     {
-        //
+        $menu = ModelsMenu::find($id);
+        return view('admin.menu.edit' , compact('menu'));
     }
 
     /**
@@ -79,6 +94,11 @@ class Menu extends Controller
      */
     public function destroy($id)
     {
-        //
+        $menu = ModelsMenu::find($id);
+        if ($menu){
+            $menu->delete();
+            return to_route('admin.menu.index');
+        }
+       abort(404);
     }
 }

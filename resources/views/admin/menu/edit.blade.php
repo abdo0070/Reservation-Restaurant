@@ -14,29 +14,27 @@
             <script src="https://cdn.tailwindcss.com"></script>
             <link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
             <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-            <a href="{{ route('admin.category.index') }}"
-                class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">category</a>
+            <a href="{{ route('admin.menu.index') }}"
+                class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Menu</a>
         </div>
         
 
 
         <div class="mt-5  justify-end md:col-span-2 md:mt-0" style="width:1000px;">
-            <form action="{{route('admin.category.update')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.menu.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('UPDATE')
               <div class="shadow sm:overflow-hidden sm:rounded-md">
                 <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
                  
-                  <input type="hidden" name="id" value={{$category->id}}>
                       <label for="company-website" class="block text-sm font-medium text-gray-700">Name</label>
                       <div class="mt-1 flex rounded-md shadow-sm">
-                        <input type="text" name="name" value ="{{$category->name}}" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Abdalla Mmdouh">
+                        <input type="text" name="name" value ="{{$menu->name}}" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Abdalla Mmdouh">
                       </div>
                  
       
                     <label for="about" class="block text-sm font-medium text-gray-700">Description</label>
                     <div class="mt-1">
-                      <textarea id="description" name="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">{{$category->description}}</textarea>
+                      <textarea id="description" name="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">{{$menu->description}}</textarea>
                     </div>
                     <p class="mt-2 text-sm text-gray-500">Brief description for your profile. URLs are hyperlinked.</p>
          
