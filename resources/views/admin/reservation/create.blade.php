@@ -28,39 +28,65 @@
                  
                       <label for="company-website" class="block text-sm font-medium text-gray-700">First Name</label>
                       <div class="mt-1 flex rounded-md shadow-sm">
-                        <input type="text" name="first_name" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="">
+                        <input type="text" name="first_name" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm   @error('first_name') border-red-400 @enderror" placeholder="">
                       </div>
+                      @error('first_name')
+                         <div class="text-red-400">{{ $message }}</div>
+                       @enderror
+
                  
                       <label for="company-website" class="block text-sm font-medium text-gray-700">Last Name</label>
                       <div class="mt-1 flex rounded-md shadow-sm">
-                        <input type="text" name="second_name" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="">
+                        <input type="text" name="second_name" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('second_name') border-red-400 @enderror" placeholder="">
                       </div>
+
+                      @error('second_name')
+                      <div class="text-red-400">{{ $message }}</div>
+                    @enderror
+
+
+
 
                       <label for="company-website" class="block text-sm font-medium text-gray-700">Email</label>
                       <div class="mt-1 flex rounded-md shadow-sm">
-                        <input type="email" name="email" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="ex : email@gmail.com">
+                        <input type="email" name="email" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('emal') border-red-400 @enderror" placeholder="ex : email@gmail.com">
                       </div>
+
+                      @error('email')
+                      <div class="text-red-400">{{ $message }}</div>
+                    @enderror
+
+
 
                       <label for="company-website" class="block text-sm font-medium text-gray-700">Guest Number</label>
                       <div class="mt-1 flex rounded-md shadow-sm">
-                        <input type="number" name="guest_number" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <input type="number" name="guest_number" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('guest_number') border-red-400 @enderror">
                       </div>
+
+                      @error('guest_number')
+                      <div class="text-red-400" >{{ $message }}</div>
+                    @enderror
+
+
                  
                       <label for="company-website" class="block text-sm font-medium text-gray-700">Phone Number</label>
                       <div class="mt-1 flex rounded-md shadow-sm">
-                        <input type="tel" name="phone" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <input type="tel" name="phone" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  @error('phone') border-red-400 @enderror ">
                       </div>
+
+                      @error('phone')
+                      <div class="text-red-400">{{ $message }}</div>
+                    @enderror
+
 
                       <label for="company-website" class="block text-sm font-medium text-gray-700">Reservation Date</label>
                       <div class="mt-1 flex rounded-md shadow-sm">
-                        <input type="date" name="res_date" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <input type="date" name="res_date" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  @error('res_date') border-red-400 @enderror">
                       </div>
-                 
 
-
-                   
-
-
+                      @error('res_date')
+                      <div class="text-red-400">{{ $message }}</div>
+                    @enderror
 
                       <label for="company-website" class="block text-sm font-medium text-gray-700">Table Number</label>
                       <div class="mt-1 flex rounded-md shadow-sm">
@@ -72,7 +98,6 @@
                             @endforeach
                         </select>
                        </div>
-                 
          
                   
 

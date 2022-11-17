@@ -17,8 +17,18 @@ class Reservation extends Controller
      */
     public function index()
     {
-        $reservation = DB::table('reservations')->orderBy('res_date')->get();
-        return view('admin.reservation.index' , compact('reservation'));
+        /*$reservations = DB::table('reservations')
+        ->select("reservations.first_name AS first_name" , "reservations.second_name AS second_name" ,
+         "reservations.phone AS phone" ,"reservations.res_date","reservations.email",
+         "reservations.guest_number","reservations.created_at","reservations.updated_at",
+         "tables.name AS table_name","tables.id as table_id","tables.status" )
+        ->join('tables', 'reservations.table_id', '=', 'tables.id')
+        ->orderBy('res_date')->get();*/
+
+
+        $reservations = ModelsReservation::all();
+
+        return view('admin.reservation.index' , compact('reservations'));
     }
 
     /**

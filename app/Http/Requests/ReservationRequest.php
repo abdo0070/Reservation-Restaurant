@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\DateBetween;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ReservationRequest extends FormRequest
@@ -13,7 +14,7 @@ class ReservationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,13 @@ class ReservationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "first_name" => 'required',
+            "second_name" => 'required',
+            "email" => 'required|email',
+            "res_date" => ['required', 'date' ,new DateBetween],
+            "phone" => 'required',
+            "guest_number" => 'required',
+            "table_id" => 'required',            
         ];
     }
 }
