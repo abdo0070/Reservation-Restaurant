@@ -1,18 +1,25 @@
 <x-Admin-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+   <x-slot name="header">
+       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+           {{ __('Dashboard') }}
+       </h2>
+   </x-slot>
+   
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <script src="https://cdn.tailwindcss.com"></script>
-                <link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
-                <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-                
-                <!-- ====== Table Section Start -->
+   <div class="py-12">
+     
+     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    
+      <div class="flex justify-end m-2 p-2">
+         <script src="https://cdn.tailwindcss.com"></script>
+         <link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
+         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+         <a href="{{route('admin.reservation.create')}}"
+             class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">New Reservation</a>
+     </div>
+
+         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+
                 <section class="bg-white py-20 lg:py-[120px]">
                    <div class="container">
                       <div class="flex flex-wrap -mx-4">

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class Category extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +17,8 @@ class Category extends Controller
      */
     public function index()
     {
-         $categories = ModelsCategory::all();
-        return view("admin.category.index" , compact('categories'));
+        $categories = ModelsCategory::all();
+        return view("admin.category.index", compact('categories'));
     }
 
     /**
@@ -39,14 +39,14 @@ class Category extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $image = $request->file('image')->store('public/categories'.time());
+        $image = $request->file('image')->store('public/categories' . time());
 
         ModelsCategory::create([
             'name' => $request->name,
             'description' => $request->description,
             'image' => $image,
-            'created_at' => date("Y-m-d H:i:s", strtotime('now')) ,
-            'updated_at' => date("Y-m-d H:i:s", strtotime('now')) ,
+            'created_at' => date("Y-m-d H:i:s", strtotime('now')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('now')),
         ]);
         return to_route('admin.category.index');
     }
@@ -60,7 +60,7 @@ class Category extends Controller
     public function show($id)
     {
         $category = ModelsCategory::find($id);
-        return view('admin.categories.edit' , compact('category'));  
+        return view('admin.categories.edit', compact('category'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -71,7 +71,7 @@ class Category extends Controller
     public function edit($id)
     {
         $category = ModelsCategory::find($id);
-        return view("admin.category.edit" ,compact('category'));
+        return view("admin.category.edit", compact('category'));
     }
 
     /**
@@ -84,13 +84,13 @@ class Category extends Controller
     public function update(CategoryRequest $request)
     {
         $image = $request->file('image')->store('public/categories');
-        DB::table("categories")->where("id",$request->id)->update([
-            'name' => $request->name ,
+        DB::table("categories")->where("id", $request->id)->update([
+            'name' => $request->name,
             'description' => $request->description,
-            'created_time' => date("Y-m-d H:i:s" , strtotime('now')),
+            'created_time' => date("Y-m-d H:i:s", strtotime('now')),
             'image' => $image,
         ]);
-     return to_route('admin.category.index');            
+        return to_route('admin.category.index');
     }
     /**
      * Remove the specified resource from storage.
@@ -102,6 +102,6 @@ class Category extends Controller
     {
         $category = ModelsCategory::find($id);
         $category->delete();
-        return to_route('admin.category.index'); 
+        return to_route('admin.category.index');
     }
 }

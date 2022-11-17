@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation as ModelsReservation;
+use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Reservation extends Controller
 {
@@ -14,9 +17,8 @@ class Reservation extends Controller
      */
     public function index()
     {
-        $reservation = ModelsReservation::all();
+        $reservation = DB::table('reservations')->orderBy('res_date')->get();
         return view('admin.reservation.index' , compact('reservation'));
-        //
     }
 
     /**
@@ -26,7 +28,9 @@ class Reservation extends Controller
      */
     public function create()
     {
-        //
+        $tables = Table::all();
+        
+        return view('admin.reservation.create' , compact('tables')) ;
     }
 
     /**
@@ -35,9 +39,21 @@ class Reservation extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
-        //
+       $reservation = new ModelsReservation();
+       $reservation->first_name = $request->first_name;
+       $reservation->second_name = $request->second_name;
+       $reservation->email = $request->email;
+       $reservation->phone = $request->phone;
+       $reservation->res_date = $request->res_date;
+       $reservation->guest_number = $request->guest_number;
+
+       $reservation->created_at = date("Y-m-d H:i:s", strtotime('now'));
+       $reservation->updated_at = date("Y-m-d H:i:s", strtotime('now'));
+
+       $reservation->table_id = 1 ;
+       $reservation->save();
     }
 
     /**
@@ -48,7 +64,9 @@ class Reservation extends Controller
      */
     public function show($id)
     {
-        //
+        $reservation = ModelsReservation::find($id);
+        dd($reservation);
+        return view('admin.reservation.edit',compact('reservation'));
     }
 
     /**
@@ -59,7 +77,7 @@ class Reservation extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.reservation.edit');
     }
 
     /**
@@ -69,7 +87,7 @@ class Reservation extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ReservationRequest $request, $id)
     {
         //
     }
@@ -82,6 +100,7 @@ class Reservation extends Controller
      */
     public function destroy($id)
     {
-        //
+        ModelsReservation::find($id)->delete();
+        return to_route('admin.reservation.index');
     }
 }

@@ -25,7 +25,7 @@ Route::middleware( [ 'auth' , 'AdminMiddleware'])->name('admin.')->prefix('admin
     Route::resource("menu",Menu::class);
     //admin.category.index
     Route::resource("category" , Category::class);
-    Route::resource("table",Table::class);
+    Route::resource("table",Table::class); 
     Route::resource("reservation",Reservation::class );
 
     Route::get('/', function () {
