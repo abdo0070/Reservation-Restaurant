@@ -42,15 +42,13 @@
                     <div class="mt-1">
                       <input type="number" name="price" id="price" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                     </div>
-         
-                    <select name="category" id="">
-                      @foreach ($categories as $category)
-
-                      <option value=" {{$category->id}} ">{{$category->name}}</option>
-                          
-                      @endforeach
-                    </select>
-
+   
+                        <select class="form-control selectpicker" multiple >
+                          <option selected disabled>Open this select menu</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
 
                   <div>
                     <label class="block text-sm font-medium text-gray-700">Image</label>

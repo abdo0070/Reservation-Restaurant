@@ -41,6 +41,11 @@ class Category extends Controller
     {
         $image = $request->file('image')->store('public/categories' . time());
 
+
+
+        $image_name = $request->file('image')->getClientOriginalName();
+        
+        dd($image_name);
         ModelsCategory::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -48,7 +53,8 @@ class Category extends Controller
             'created_at' => date("Y-m-d H:i:s", strtotime('now')),
             'updated_at' => date("Y-m-d H:i:s", strtotime('now')),
         ]);
-        return to_route('admin.category.index');
+
+        return to_route('admin.category.index')->with('success','the category has been add successfuly.');
     }
 
     /**
@@ -90,7 +96,7 @@ class Category extends Controller
             'created_time' => date("Y-m-d H:i:s", strtotime('now')),
             'image' => $image,
         ]);
-        return to_route('admin.category.index');
+        return to_route('admin.category.index')->with('warning','has been updated .');
     }
     /**
      * Remove the specified resource from storage.
@@ -102,6 +108,6 @@ class Category extends Controller
     {
         $category = ModelsCategory::find($id);
         $category->delete();
-        return to_route('admin.category.index');
+        return to_route('admin.category.index')->with('danger','the category has been deleted');
     }
 }

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation as ModelsReservation;
 use App\Models\Table;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\DB;
 
 class Reservation extends Controller
@@ -26,7 +27,7 @@ class Reservation extends Controller
         ->orderBy('res_date')->get();*/
 
 
-        $reservations = ModelsReservation::all();
+        $reservations = ModelsReservation::orderBy('res_date')->get();
 
         return view('admin.reservation.index' , compact('reservations'));
     }
@@ -38,9 +39,9 @@ class Reservation extends Controller
      */
     public function create()
     {
-        $tables = Table::all();
+        $tables = Table::where('status' , 'available')->get();
         
-        return view('admin.reservation.create' , compact('tables')) ;
+        return view('admin.reservation.create' , compact('tables'));
     }
 
     /**
@@ -51,6 +52,7 @@ class Reservation extends Controller
      */
     public function store(ReservationRequest $request)
     {
+
        $reservation = new ModelsReservation();
        $reservation->first_name = $request->first_name;
        $reservation->second_name = $request->second_name;
@@ -61,9 +63,32 @@ class Reservation extends Controller
 
        $reservation->created_at = date("Y-m-d H:i:s", strtotime('now'));
        $reservation->updated_at = date("Y-m-d H:i:s", strtotime('now'));
+       $reservation->table_id = $request->table_id;
 
-       $reservation->table_id = 1 ;
+        // check if the guest is suitable for the selected table 
+       $guestNumber = $request->guest_number;
+       $tableGuestNumber = $reservation->table->guest_number;
+       if ($tableGuestNumber < $guestNumber)
+       {
+        return back()->with('warning','please select the table based on your guest number .');
+       }
+
+       // check the date if it available in the selected day .
+       $reservationsOnThisTable =  DB::table('reservations')
+       ->select('res_date')
+       ->where('table_id' ,$reservation->table_id)->get();
+       $request_date = Carbon::parse($request->res_date);
+       foreach($reservationsOnThisTable as $reservation_date)
+       {
+        if($reservation_date->res_date == $request_date)
+        {
+            return back()->with('warning' , 'please choose anthor date ');
+        }
+       }
+
+       // if it ok so store a new reservation and move back to the index page
        $reservation->save();
+       return to_route('admin.reservation.index')->with('success' , 'Reservation added successfuly .');
     }
 
     /**
@@ -87,7 +112,10 @@ class Reservation extends Controller
      */
     public function edit($id)
     {
-        return view('admin.reservation.edit');
+        $reservation = ModelsReservation::find($id);
+        $tables = Table::where('status' , 'available')->get();
+        
+        return view('admin.reservation.edit',compact('reservation' , 'tables'));
     }
 
     /**
@@ -97,9 +125,10 @@ class Reservation extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ReservationRequest $request, $id)
+    public function update(ReservationRequest $request,ModelsReservation $reservation)
     {
-        //
+        $reservation->update($request->validated());
+        return to_route('admin.reservation.index')->with('success', 'Reservation updated successfully.');
     }
 
     /**
@@ -111,6 +140,6 @@ class Reservation extends Controller
     public function destroy($id)
     {
         ModelsReservation::find($id)->delete();
-        return to_route('admin.reservation.index');
+        return to_route('admin.reservation.index')->with('danger','the reservation has been deleted');
     }
 }

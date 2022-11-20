@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\DateBetween;
+use App\Rules\TableValidation;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ReservationRequest extends FormRequest
@@ -22,6 +23,7 @@ class ReservationRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
+    
     public function rules()
     {
         return [

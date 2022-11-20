@@ -7,6 +7,36 @@
    
 
    <div class="py-12">
+
+
+      @if (session()->has('success'))
+          
+       <div class="alert alert-success alert-dismissible fade show" role="alert">
+         <strong>Successfuly </strong>  {{ session()->get('success') }}
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+       </div>
+
+      @endif
+
+      @if (session()->has('danger'))
+          
+       <div class="alert alert-danger alert-dismissible fade show" role="alert">
+         <strong>Danger </strong>  {{ session()->get('danger') }}
+         <button type="button" class="btn-close" data-bs-dismiss="danger" aria-label="Close"></button>
+       </div>
+
+      @endif
+
+      @if (session()->has('warning'))
+          
+       <div class="alert alert-success alert-dismissible fade show" role="alert">
+         <strong>Warning </strong>  {{ session()->get('warning') }}
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+       </div>
+
+      @endif
+    
+
      
      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     
@@ -107,7 +137,24 @@
                                            >
                                            Reservation Date
                                         </th>
-                                    
+                                        <th
+                                           class="
+                                           w-1/6
+                                           min-w-[160px]
+                                           text-lg
+                                           font-semibold
+                                           text-white
+                                           py-4
+                                           lg:py-7
+                                           px-3
+                                           lg:px-4
+                                           border-r border-transparent
+                                           "
+                                           >
+                                           Edit
+                                        </th>
+
+                                        
                                         
                                      </tr>
                                   </thead>
@@ -183,6 +230,55 @@
                                           >
                                           {{$reservation->res_date}}
                                        </td>
+
+                                       <td
+                                       class="
+                                       text-center text-dark
+                                       font-medium
+                                       text-base
+                                       py-5
+                                       px-2
+                                       bg-white
+                                       border-b border-r border-[#E8E8E8]
+                                       "
+                                       >
+
+                                         <a 
+                                         href="{{ route('admin.reservation.edit', $reservation->id) }}"
+                                         class="
+                                         border border-primary
+                                         py-2
+                                         px-15
+                                         m-2
+                                         text-primary
+                                         inline-block
+                                         rounded
+                                         hover:bg-primary hover:text-white
+                                         "
+                                         >Update</a>
+                                         
+                                      </form>
+
+                                      <form action="{{ route('admin.reservation.destroy', $reservation->id) }}" method="POST">
+                                         @csrf
+                                         @method('DELETE')
+                                         <button type="text" type="submit" 
+                                         class="
+                                         border border-primary
+                                         py-2
+                                         px-15
+                                         m-2
+                                         
+                                         text-primary
+                                         inline-block
+                                         rounded
+                                         hover:bg-primary hover:text-white
+                                         "
+                                         >Delete</button>
+                                    </td>
+
+
+
                                     </tr>
                                     @endforeach
                                    

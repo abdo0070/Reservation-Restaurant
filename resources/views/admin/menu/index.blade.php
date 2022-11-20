@@ -7,6 +7,37 @@
     
 
     <div class="py-12">
+
+      
+      @if (session()->has('success'))
+          
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Successfuly </strong>  {{ session()->get('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+     @endif
+
+     @if (session()->has('danger'))
+         
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Danger </strong>  {{ session()->get('danger') }}
+        <button type="button" class="btn-close" data-bs-dismiss="danger" aria-label="Close"></button>
+      </div>
+
+     @endif
+
+     @if (session()->has('warning'))
+         
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Warning </strong>  {{ session()->get('warning') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+     @endif
+   
+    
+
       
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
      
