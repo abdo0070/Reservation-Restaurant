@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\Admin as ControllersAdmin;
 use App\Http\Controllers\Category;
+use App\Http\Controllers\Frontend\Category as FrontendCategory;
+use App\Http\Controllers\Frontend\Guest;
+use App\Http\Controllers\Frontend\Menu as FrontendMenu;
+use App\Http\Controllers\Frontend\Reservation as FrontendReservation;
 use App\Http\Controllers\Menu;
 use App\Http\Controllers\Reservation;
 use App\Http\Controllers\Table;
@@ -31,13 +35,31 @@ Route::middleware( [ 'auth' , 'AdminMiddleware'])->name('admin.')->prefix('admin
     Route::get('/', function () {
         return view('welcome');
     });
-
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+
+Route::get('/menu',[FrontendMenu::class,'index'])->name('menu.index');
+
+Route::get('/menu/show',[FrontendMenu::class,'show'])->name('menu.show');
+
+
+Route::get('/',[Guest::class , 'index']);
+
+
+Route::get('/category', [FrontendCategory::class , 'index'])->name('category.index');
+Route::get('category/show' , [FrontendCategory::class , 'show'])->name('category.show');
+
+
+Route::get('/reservation' , [FrontendReservation::class , 'stepOne'])->name('reservation.step.one');
+
+Route::get('/reservation/stepTwo' , [FrontendReservation::class , 'stepTwo'])->name('reservation.step.two');
+
+Route::post('/reservation/step/one/store' , [FrontendReservation::class , 'stepOneStore'])->name('reservation.step.one.store');
+Route::post('/reservation/step/two/store' , [FrontendReservation::class , 'stepTwoStore'])->name('reservation.step.two.store');
+
+
+Route::get('/thank',[Guest::class , 'thankyou'])->name('thankyou');
 
 
 Route::get('/dashboard', function () {
