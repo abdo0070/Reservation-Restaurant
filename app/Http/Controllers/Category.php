@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category as ModelsCategory;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +19,7 @@ class Category extends Controller
     public function index()
     {
         $categories = ModelsCategory::all();
-        return view("admin.category.index", compact('categories'));
+        return view("admin.category.index",compact('categories'));
     }
 
     /**
@@ -28,7 +29,8 @@ class Category extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $menus = Menu::all();
+        return view('admin.category.create',compact('menus'));
     }
 
     /**
@@ -45,7 +47,6 @@ class Category extends Controller
 
         $image_name = $request->file('image')->getClientOriginalName();
         
-        dd($image_name);
         ModelsCategory::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -53,6 +54,8 @@ class Category extends Controller
             'created_at' => date("Y-m-d H:i:s", strtotime('now')),
             'updated_at' => date("Y-m-d H:i:s", strtotime('now')),
         ]);
+        
+        
 
         return to_route('admin.category.index')->with('success','the category has been add successfuly.');
     }

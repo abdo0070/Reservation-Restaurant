@@ -10,17 +10,18 @@ class Guest extends Controller
 {
     public function index()
     {
-
-
         $menus = Menu::all();
-
-
         return view('welcome' , compact('menus'));
     }
 
-    public function thankyou()
+    public function thankyou(Request $request)
     {
-        return view('frontend.thankyou');
+        if ($request->session()->get('thanks'))
+        {
+            $request->session()->forget('thanks');
+            return view('frontend.thankyou');
+        }
+        return abort(403);      
     }
     
 }

@@ -79,7 +79,8 @@ class Reservation extends Controller
         $reservation->save();
         $request->session()->forget('reservation');
 
-        return to_route('thankyou');
+        
+        return to_route('thankyou')->with('thanks', true);
     }
 
 

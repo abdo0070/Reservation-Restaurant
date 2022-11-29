@@ -6,7 +6,7 @@
   style="background-image: url('https://cdn.pixabay.com/photo/2016/11/18/14/39/beans-1834984_960_720.jpg')">
   <h1
     class="font-mono text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 md:text-center sm:leading-none lg:text-5xl">
-    <span class="inline md:block">Welcome To Larainfo Restaurant</span>
+    <span class="inline md:block">Welcome To   3afaret Restaurant</span>
   </h1>
   <div class="mx-auto mt-2 text-green-50 md:text-center lg:text-lg">
     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta voluptatem ab necessitatibus illo praesentium
@@ -120,7 +120,7 @@
     
 
 
-      @foreach ($menus as $menu)
+      @foreach ($menus as $menu )
 
       <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg">
           <img class="w-full h-48" src="{{ Storage::url($menu->image) }}"
@@ -135,7 +135,7 @@
           <div class="flex items-center justify-between p-4">
 
               <a href=" {{ route('menu.show' , $menu->id) }} ">
-                  <span class="text-xl text-green-600">${{$menu->price}}4</span>
+                  <span class="text-xl text-green-600">${{$menu->price}}</span>
               </a>
             
           </div>

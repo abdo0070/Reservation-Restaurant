@@ -29,7 +29,7 @@
 
      @if (session()->has('warning'))
          
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>Warning </strong>  {{ session()->get('warning') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
@@ -45,8 +45,8 @@
           <script src="https://cdn.tailwindcss.com"></script>
           <link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
           <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-          <a href="{{ route('admin.menu.create') }}"
-              class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">New Menu</a>
+          <a href="{{ route('admin.create') }}"
+              class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">New admin</a>
       </div>
 
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -90,8 +90,25 @@
                                            lg:px-4
                                            "
                                            >
-                                           Description
+                                           Email
                                         </th>
+                                      
+                                        <th
+                                        class="
+                                        w-1/6
+                                        min-w-[160px]
+                                        text-lg
+                                        font-semibold
+                                        text-white
+                                        py-4
+                                        lg:py-7
+                                        px-3
+                                        lg:px-4
+                                        "
+                                        >
+                                        Created at                                   
+                                     </th>
+
                                         <th
                                            class="
                                            w-1/6
@@ -105,24 +122,9 @@
                                            lg:px-4
                                            "
                                            >
-                                           Price
+                                           Last Update                                   
                                         </th>
-                                   
-                                        <th
-                                           class="
-                                           w-1/6
-                                           min-w-[160px]
-                                           text-lg
-                                           font-semibold
-                                           text-white
-                                           py-4
-                                           lg:py-7
-                                           px-3
-                                           lg:px-4
-                                           "
-                                           >
-                                           Image
-                                        </th>
+                                 
                                         <th
                                            class="
                                            w-1/6
@@ -142,7 +144,7 @@
                                      </tr>
                                   </thead>
                                   <tbody>
-                                    @foreach ($menus as $menu)
+                                    @foreach ($admins as $admin)
 
                                      <tr>
                                         <td
@@ -156,7 +158,7 @@
                                            border-b border-l border-[#E8E8E8]
                                            "
                                            >
-                                           {{$menu['name']}}
+                                           {{$admin->name}}
                                         </td>
                                         <td
                                            class="
@@ -169,7 +171,7 @@
                                            border-b border-[#E8E8E8]
                                            "
                                            >
-                                           {{$menu['description']}}
+                                           {{$admin->email}}
                                         </td>
                                         <td
                                            class="
@@ -182,25 +184,24 @@
                                            border-b border-[#E8E8E8]
                                            "
                                            >
-                                           {{$menu['price']}}
+                                           {{$admin->updated_at}}
                                         </td>
 
                                         <td
-                                          class="
-                                          text-center text-dark
-                                          font-medium
-                                          text-base
-                                          py-5
-                                          px-2s
-                                          bg-[#F3F6FF]
-                                          border-b border-[#E8E8E8]
-                                          "
-                                          >
-                                          <div class="card">
-                                             <img src="{{Storage::url($menu->image)}}">
-                                          </div>    
-                                       </td>
-
+                                           class="
+                                           text-center text-dark
+                                           font-medium
+                                           text-base
+                                           py-5
+                                           px-2
+                                           bg-[#F3F6FF]
+                                           border-b border-[#E8E8E8]
+                                           "
+                                           >
+                                           {{$admin->created_at}}
+                                        </td>
+                                   
+                            
                                         <td
                                            class="
                                            text-center text-dark
@@ -214,7 +215,7 @@
                                            >
 
                                              <a 
-                                             href="{{ route('admin.menu.edit', $menu->id) }}"
+                                             href="{{ route('admin.edit', $admin->id) }}"
                                              class="
                                              border border-primary
                                              py-2
@@ -229,7 +230,7 @@
                                              
                                           </form>
 
-                                          <form action="{{ route('admin.menu.destroy', $menu->id) }}" method="POST">
+                                          <form action="{{ route('admin.destroy', $admin->id) }}" method="POST">
                                              @csrf
                                              @method('DELETE')
                                              <button type="text" type="submit" 

@@ -28,14 +28,23 @@
                  
                       <label for="company-website" class="block text-sm font-medium text-gray-700">Name</label>
                       <div class="mt-1 flex rounded-md shadow-sm">
-                        <input type="text" name="name" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Abdalla Mmdouh">
+                        <input type="text" name="name" id="name" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('name') border-red-400 @enderror " >
                       </div>
+
+                      @error('name')
+                      <div class="text-red-400">{{ $message }}</div>
+                    @enderror
+
                  
       
                     <label for="about" class="block text-sm font-medium text-gray-700">Description</label>
                     <div class="mt-1">
-                      <textarea id="description" name="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+                      <textarea id="description" name="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('description') border-red-400 @enderror "></textarea>
                     </div>
+
+                    @error('description')
+                    <div class="text-red-400">{{ $message }}</div>
+                  @enderror
          
       
                
@@ -57,6 +66,10 @@
                         <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                       </div>
                     </div>
+                    @error('image')
+                    <div class="text-red-400">{{ $message }}</div>
+                  @enderror
+
                   </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">

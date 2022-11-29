@@ -6,6 +6,7 @@ use App\Http\Requests\MenuRequest;
 use App\Models\Category;
 use App\Models\Menu as ModelsMenu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Menu extends Controller
 {
@@ -17,6 +18,7 @@ class Menu extends Controller
     public function index()
     {
         $menus = ModelsMenu::all();
+      
        return view('admin.menu.index' , compact('menus'));
 
     }
@@ -29,6 +31,7 @@ class Menu extends Controller
     public function create()
     {
         $categories = Category::all();
+       
         return view('admin.menu.create',compact('categories'));   
     }
 
@@ -41,13 +44,20 @@ class Menu extends Controller
     public function store(MenuRequest $request)
     {
         $image = $request->file('image')->store('public/categories'.time());
-        ModelsMenu::create([
+        $menu = ModelsMenu::create([
             'name' => $request->name,
             'price' => $request->price,
             'image' => $image,
             'description' => $request->description
         ]);
 
+        if ($request->has('categories')) {
+            $category =  $request->categories;          
+                DB::table('category_menu')->insert([
+                    'category_id' => $category,
+                    'menu_id' => $menu->id
+                ]);
+        }
         return to_route('admin.menu.index');
     }
 
@@ -70,8 +80,9 @@ class Menu extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::all();
         $menu = ModelsMenu::find($id);
-        return view('admin.menu.edit' , compact('menu'));
+        return view('admin.menu.edit' , compact('menu','categories'));
     }
 
     /**
@@ -81,9 +92,23 @@ class Menu extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MenuRequest $request, $id)
     {
-        //
+        $menu = ModelsMenu::find($id);
+        $status = DB::table('category_menu')->where('menu_id',$id)->update([
+            'category_id' => $request->categories,
+        ]);
+        $menu->fill($request->input());
+        $menu->save();
+        if ($status)
+        {  
+            return to_route('admin.list')->with('warning' , 'the admin has been updated succsessfuly .');
+        }
+        DB::table('category_menu')->insert([
+            'category_id' => $request->categories,
+            'menu_id' => $id
+        ]);
+        return to_route('admin.list')->with('warning' , 'the admin has been updated succsessfuly .');
     }
 
     /**

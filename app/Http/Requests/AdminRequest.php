@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Middleware\Admin;
+use App\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class AdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -12,8 +14,8 @@ class CategoryRequest extends FormRequest
      * @return bool
      */
     public function authorize()
-    {
-        return true;
+    { 
+        return Admin::handleRequest();
     }
 
     /**
@@ -24,9 +26,10 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>'required|min:10',
-            'description' => 'required|min:20|max:60',
-            'image' => ['image', 'required']
-        ];
+            'name' => ['required'],
+            'email' => ['email'] ,
+            'password' => ['required',new Password] ,
+        ];     
     }
+ 
 }

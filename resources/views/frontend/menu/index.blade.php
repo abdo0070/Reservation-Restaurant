@@ -21,7 +21,7 @@
                 <div class="flex items-center justify-between p-4">
 
                     <a href=" {{ route('menu.show' , $menu->id) }} ">
-                        <span class="text-xl text-green-600">${{$menu->price}}4</span>
+                        <span class="text-xl text-green-600">${{$menu->price}}</span>
                     </a>
                   
                 </div>

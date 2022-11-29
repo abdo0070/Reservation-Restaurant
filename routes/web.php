@@ -32,9 +32,15 @@ Route::middleware( [ 'auth' , 'AdminMiddleware'])->name('admin.')->prefix('admin
     Route::resource("table",Table::class); 
     Route::resource("reservation",Reservation::class );
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/list' , [ControllersAdmin::class , "list"])->name('list');
+    Route::get('/create' , [ControllersAdmin::class , "create"])->name('create');
+    Route::get('/edit/{id}' , [ControllersAdmin::class , "edit"])->name('edit');
+    Route::post('/store' , [ControllersAdmin::class , "store"])->name('store');
+    Route::put('/update}' , [ControllersAdmin::class , "update"])->name('update');
+    Route::delete('/destroy/{id}' , [ControllersAdmin::class , "destroy"])->name('destroy');
+
+    Route::get("/" , [ControllersAdmin::class , "index"])->name('index');
+
 });
 
 
@@ -44,7 +50,7 @@ Route::get('/menu',[FrontendMenu::class,'index'])->name('menu.index');
 Route::get('/menu/show',[FrontendMenu::class,'show'])->name('menu.show');
 
 
-Route::get('/',[Guest::class , 'index']);
+Route::get('/',[Guest::class , 'index'])->name('index');
 
 
 Route::get('/category', [FrontendCategory::class , 'index'])->name('category.index');

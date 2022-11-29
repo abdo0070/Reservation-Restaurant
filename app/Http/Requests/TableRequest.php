@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\TableStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class TableRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +25,10 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>'required|min:10',
-            'description' => 'required|min:20|max:60',
-            'image' => ['image', 'required']
+            'name' => 'required|min:3|max:40',
+            'guest_number' => 'required',
+            'location' => 'required',
+            'status' => ['required' , new TableStatus]
         ];
     }
 }

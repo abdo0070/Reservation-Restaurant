@@ -23,6 +23,16 @@ class Admin
             
             return $next($request);
         }
-        abort(403);
+        return abort(403);
+    }
+    public static function handleRequest()
+    {
+        if (auth()->check() && auth()->user()->is_admin) // true , false 
+        {
+            
+            return true;
+        }
+        return false;
+
     }
 }
