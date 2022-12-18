@@ -68,7 +68,7 @@
                     </div>
                     @error('image')
                     <div class="text-red-400">{{ $message }}</div>
-                  @enderror
+                   @enderror
 
                   </div>
                 </div>

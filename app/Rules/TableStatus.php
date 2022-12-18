@@ -25,6 +25,7 @@ class TableStatus implements Rule
      */
     public function passes($attribute, $value)
     {
+        // this to table valiadation
         return $value == 'available' || $value == 'busy';
     }
 

@@ -41,7 +41,7 @@ Route::middleware( [ 'auth' , 'AdminMiddleware'])->name('admin.')->prefix('admin
 
     Route::get("/" , [ControllersAdmin::class , "index"])->name('index');
 
-});
+}); 
 
 
 

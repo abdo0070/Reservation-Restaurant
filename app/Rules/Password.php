@@ -26,7 +26,7 @@ class Password implements Rule
      */
     public function passes($attribute, $value)
     {
-        
+        // password validation
         $this->lengthPasses = (Str::length($value) >= 10);
         $this->uppercasePasses = (Str::lower($value) !== $value);
         $this->numericPasses = ((bool) preg_match('/[0-9]/', $value));

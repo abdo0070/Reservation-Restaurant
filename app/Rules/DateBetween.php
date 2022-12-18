@@ -26,6 +26,7 @@ class DateBetween implements Rule
      */
     public function passes($attribute, $value)
     {
+    
         $selectedDate = Carbon::parse($value);
         $lastDate = Carbon::now()->addMonth();
 

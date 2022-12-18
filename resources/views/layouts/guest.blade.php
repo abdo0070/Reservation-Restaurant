@@ -50,21 +50,34 @@
                 <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
                   href="category">Category</a>
 
-              
-
+                <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                  href="reservation">Make Reservation</a>
 
                   @auth
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" 
                     style="display: none;">
                       @csrf
                   </form>
-                  @endauth
-
-                  <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                     <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
                               href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                               id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                                   <i class="mdi mdi-logout">Log out</i>
                   </a>
+                  @endauth
+
+
+                  @if (!Auth::check() )
+
+                 
+                   <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                            href="{{ route('login') }}"
+                            id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                                <i class="mdi mdi-logout">Login</i>
+                  </a>
+
+                  @endif
+                
+             
 
                 <div>
                
